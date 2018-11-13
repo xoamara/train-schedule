@@ -1,0 +1,79 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Schedules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer type="text/javascript" src="assets/javascript/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Train Schedules</h1>
+        <p class="lead">A Comprehensive Directory of Inbound and Outbound Trains</p>
+        <hr class="my-4">
+    </div>
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8 pl-0 pr-0">
+            <div class="card-header border">Current Train Schedule
+            </div>
+            <table class="table border" id="trains">
+                <thead>
+                    <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- dynamic table data on submit button-->
+                </tbody>
+            </table>
+            <div class="border">
+                <div class="card-header">Add Train
+                </div>
+                <form>
+                    <div class="form-group col-12 mt-3">
+                        <label for="train-name">Train Name</label>
+                        <input type="name" class="form-control" id="train-name" placeholder="Polar Express">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="destination">Destination</label>
+                        <input type="text" class="form-control" id="destination" placeholder="North Pole">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="first-train">First Train Time (HH:mm - military time)</label>
+                        <input type="time" format="HH:mm" class="form-control" id="start-time" placeholder="13:30">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="frequency">Frequency</label>
+                        <input type="number" class="form-control" id="frequency-min">
+                    </div>
+                    <button class="btn btn-primary btn-md float-left mt-3 ml-3 mb-3" type="submit" class="btn btn-secondary">Submit</button>
+                </form>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+</html>
