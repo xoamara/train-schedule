@@ -1,48 +1,43 @@
+function renderRow(trainRow) {
+
+    let mytRow = $("<tr>");
+    let nameCell = $("<td>").text(trainRow.name);
+    let destinationCell = $("<td>").text(trainRow.destination);
+    let frequencyMinCell = $("<td>").text(trainRow.frequencyMin);
+    let nextArrivalCell = $("<td>").text(trainRow.nextArrival);
+    let minutesAwayCell = $("<td>").text(trainRow.minutesAway);
+
+    mytRow.append(nameCell, destinationCell, frequencyMinCell, nextArrivalCell, minutesAwayCell);
+    $("tbody").append(mytRow);
+}
+
+
 $("document").ready(function () {
 
     $(document).on("click", ".btn", function (e) {
         (e).preventDefault();
 
+        //Grabbing user inputs and storing to a variable
         let trainName = $("#train-name").val().trim();
         let destination = $("#destination").val().trim();
-        let firstTrain = $("#start-time").val().trim();
+        let startTime = $("#start-time").val().trim();
         let frequencyMin = $("#frequency-min").val().trim();
 
 
-        $("#train-name").push(trainName);
-        $("#destination").push(destination);
-        $("#frequency-min").push(frequencyMin);
-
-
-        function renderRow() {
-            let nextArrival = 0;
-            let minutesAway = 0;
-
-            let mytRow = $("<tr>");
-
-            function renderCell(cellData) {
-                let mytData = $("<td>");
-                mytData.text(cellData);
-                mytRow.append(mytData);
-            }
-
-            renderCell(trainName);
-            renderCell(destination);
-            renderCell(frequencyMin);
-            renderCell(nextArrival);
-            renderCell(minutesAway);
-
-            $("tbody").append(mytRow);
-
-        }
-        renderRow();
-
+        //Pushing object data to firebase
         database.ref().push({
             trainName: trainName,
             destination: destination,
-            frequencyMin: frequencyMin,
-            firstTrain: firstTrain,
+            startTime: startTime,
+            frequencyMin: parseInt(frequencyMin),     
         });
+
+
+        //Emptying input boxes on html after submit
+        $("#train-name").val("");
+        $("#destination").val("");
+        $("#start-time").val("");
+        $("#frequency-min").val("");
 
     });
 
@@ -65,31 +60,31 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val().trainName);
     console.log(childSnapshot.val().destination);
     console.log(childSnapshot.val().frequencyMin);
-    console.log(childSnapshot.val().firstTrain);
+    console.log(childSnapshot.val().startTime);
 
-    function renderRow() {
-        let nextArrival = 0;
-        let minutesAway = 0;
 
-        let mytRow = $("<tr>");
-
-        function renderCell(cellData) {
-            let mytData = $("<td>");
-            mytData.text(cellData);
-            mytRow.append(mytData);
-        }
-
-        renderCell(childSnapshot.val().trainName);
-        renderCell(childSnapshot.val().destination);
-        renderCell(childSnapshot.val().frequencyMin);
-        renderCell(nextArrival);
-        renderCell(minutesAway);
-
-        $("tbody").append(mytRow);
-
+    let trainRow = {
+        name: (childSnapshot.val().trainName),
+        destination: (childSnapshot.val().destination),
+        startTime: (childSnapshot.val().startTime),
+        frequencyMin: parseInt(childSnapshot.val().frequencyMin),
+        minutesAway: minutesAway,
+        nextArrival: nextArrival,
     }
-    renderRow();
 
+    var startTimeConverted = moment(trainRow.startTime, "HH:mm").subtract(1, "years");
+    var diffTime = moment().diff(moment(startTimeConverted), "minutes");
+    var timeRemainder = diffTime % trainRow.frequencyMin;
+    var minutesAway = trainRow.frequencyMin - timeRemainder;
+    var nextArrival = moment().add(minutesAway, "m").format("hh:mm A");
+
+    console.log(minutesAway);
+    console.log(nextArrival);
+
+    // minutesAwayCell.append(minutesAway);
+    // nextArrivalCell.append(nextArrival);
+
+    renderRow(trainRow);
 
 });
 
