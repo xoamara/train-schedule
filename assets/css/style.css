@@ -1,0 +1,52 @@
+th {
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #858788;
+}
+
+body {
+    background-image: url("../images/background3.jpg");
+    background-size: cover;
+}
+
+.jumbotron  {
+    font-family: 'Rye', cursive;
+    color: whitesmoke;
+    background-image: url("../images/background2.jpg");
+    text-shadow: black 0.3em 0.3em 0.3em;
+
+}
+
+table tr {
+    font-family: 'Oswald', sans-serif;
+    border-top: 1px solid #858788!important;
+    border-bottom: 1px solid #858788!important;
+}
+
+.display-4 {
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.lead {
+    font-size: 2.0rem;
+    font-weight: 300;
+}
+
+.card-header, .border {
+    font-family: 'Rye', cursive;
+    font-size: 1.25em;
+    border-top: 2px solid #858788!important;
+    border-bottom: 2px solid #858788!important;
+    border-right: none;
+    border-left: none;
+}
+
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,0.55)!important;
+}

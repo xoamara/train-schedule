@@ -68,8 +68,8 @@ database.ref().on("child_added", function (childSnapshot) {
         destination: (childSnapshot.val().destination),
         startTime: (childSnapshot.val().startTime),
         frequencyMin: parseInt(childSnapshot.val().frequencyMin),
-        minutesAway: minutesAway,
-        nextArrival: nextArrival,
+        minutesAway: 0,
+        nextArrival: 0,
     }
 
     var startTimeConverted = moment(trainRow.startTime, "HH:mm").subtract(1, "years");
@@ -81,8 +81,8 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(minutesAway);
     console.log(nextArrival);
 
-    // minutesAwayCell.append(minutesAway);
-    // nextArrivalCell.append(nextArrival);
+    trainRow.minutesAway=minutesAway;
+    trainRow.nextArrival=nextArrival;
 
     renderRow(trainRow);
 
